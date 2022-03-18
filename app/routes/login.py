@@ -30,12 +30,6 @@ def login():
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-<<<<<<< HEAD
-        user = User.objects.get(username=form.username.data)
-        # if user is None or not user.check_password(form.password.data):
-        #     flash('Invalid username or password')
-        #     return redirect(url_for('login'))
-=======
         try:
             user = User.objects.get(username=form.username.data)
         except mongoengine.errors.DoesNotExist:
@@ -45,7 +39,6 @@ def login():
             if user is None or not user.check_password(form.password.data):
                 flash('Invalid username or password')
                 return redirect(url_for('login'))
->>>>>>> 68c2bbf7d7fe633c848f8ed4bd4e7ad708ba50e5
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
@@ -68,8 +61,8 @@ def register():
     if form.validate_on_submit():
         newUser = User(
             username=form.username.data, 
-            # fname=form.fname.data,
-            # lname=form.lname.data,
+            fname=form.fname.data,
+            lname=form.lname.data,
             email=form.email.data
             )
         newUser.save()
