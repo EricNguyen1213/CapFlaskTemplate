@@ -23,8 +23,12 @@
         {% if post.author.image %}
             <img width="120" class="img-thumbnail float-start me-2" src="data:image;base64,{{base64encode(post.author.image.read())}}">
         {% endif %}
+<<<<<<< HEAD
             {{post.content}} <br>
             {{post.tags}} <br>
+=======
+            {{post.content}}
+>>>>>>> a08386a94239d8d234ae0d5a1ef66aa9d43ea93c
     </p>
     <a href="/comment/new/{{post.id}}" class="btn btn-primary btn-sm" role="button">New Comment</a>
 
