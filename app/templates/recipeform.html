@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block body %}
+        <h1></h1>
+
+        <form method=post>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.food_name.label }} <br>
+                {{ form.food_name(size=64) }}
+                <!--List the errors for this field-->
+                {% for error in form.subject.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.content.label }} <br>
+                {{ form.content(cols=64, rows=10) }}
+                <!--List the errors for this field-->
+                {% for error in form.content.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.tags.label }}<br>
+                {{ form.tags() }}<br>
+                {% for error in form.tags.errors %}
+                <span style="color: rgb(0, 148, 104);">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{form.submit()}}
+            </p>
+        </form>
+        
+{% endblock %}

@@ -1,0 +1,128 @@
+from app import app, login
+import mongoengine.errors
+from flask import render_template, flash, redirect, url_for
+from flask_login import current_user
+from app.classes.data import Recipe
+from app.classes.forms import RecipeForm
+from flask_login import login_required
+import datetime as dt
+
+@app.route('/recipe/list')
+
+@login_required
+
+def postList():
+
+    recipes = Recipe.objects()
+
+    return render_template('recipes.html',recipes=recipes)
+
+@app.route('/recipe/<recipeID>')
+
+@login_required
+
+def post(recipeID):
+
+    thisRecipe = Recipe.objects.get(id=recipeID)
+
+    return render_template('recipe.html',recipe=thisRecipe)
+
+@app.route('/recipe/delete/<recipeID>')
+# Only run this route if the user is logged in.
+@login_required
+def postDelete(recipeID):
+
+    deleteRecipe = Recipe.objects.get(id=recipeID)
+
+    if current_user == deleteRecipe.author:
+
+        deleteRecipe.delete()
+
+        flash('The Recipe was deleted.')
+    else:
+
+        flash("You can't delete a recipe you didn't create.")
+
+    recipes = Recipe.objects()  
+
+    return render_template('posts.html',recipes=recipes)
+
+@app.route('/recipe/new', methods=['GET', 'POST'])
+
+@login_required
+
+def recipeNew():
+
+    form = RecipeForm()
+
+     
+    if form.validate_on_submit():
+
+        newRecipe = Recipe(
+            
+            food_name = form.food_name.data,
+            food_media = form.food_media.data,
+
+            ingredient_name = form.ingredient_name.data,
+            ingredient_amount = form.ingredient_amount.data,
+            ingredient_cost = form.ingredient_cost.data,
+
+            recipe_step = form.recipe_step.data,
+            author = current_user.id,
+            
+            modifydate = dt.datetime.utcnow
+        )
+
+        newRecipe.save()
+
+        return redirect(url_for('recipe',recipeID=newRecipe.id))
+
+    
+    return render_template('recipeform.html',form=form)
+
+
+@app.route('/recipe/edit/<recipeID>', methods=['GET', 'POST'])
+@login_required
+def recipeEdit(recipeID):
+    editRecipe = Recipe.objects.get(id=recipeID)
+    
+    
+    if current_user != editRecipe.author:
+        flash("You can't edit a recipe you don't own.")
+        return redirect(url_for('recipe',recipeID=recipeID))
+    
+    form = RecipeForm()
+    
+    if form.validate_on_submit():
+        
+        editRecipe.update(
+            
+            food_name = form.food_name.data,
+            food_media = form.food_media.data,
+
+            ingredient_name = form.ingredient_name.data,
+            ingredient_amount = form.ingredient_amount.data,
+            ingredient_cost = form.ingredient_cost.data,
+
+            recipe_step = form.recipe_step.data,
+            author = current_user.id,
+            
+            modifydate = dt.datetime.utcnow
+
+        )
+        
+        return redirect(url_for('recipe',recipeID=recipeID))
+
+    
+
+    form.food_name.data = editRecipe.food_name
+    form.food_media.data = editRecipe.food_media
+
+    form.ingredient_name.data = editRecipe.ingredient_name
+    form.ingredient_amount.data = editRecipe.ingredient_amount
+    form.ingredient_cost.data = editRecipe.ingredient_cost
+
+    form.recipe_step.data = editRecipe.recipe_step
+    
+
+    return render_template('recipeform.html',form=form)
