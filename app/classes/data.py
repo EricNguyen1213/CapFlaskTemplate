@@ -69,3 +69,21 @@ class Comment(Document):
     meta = {
         'ordering': ['-createdate']
     }
+
+class Recipe(Document):
+    author = ReferenceField('User', reverse_delete_rule=CASCADE)
+    food_name = StringField()
+    food_media = FileField()
+
+# Want this information to be contained in a list within this class
+    ingredient_name = StringField()
+    ingredient_amount = StringField()
+    ingredient_cost = StringField()
+
+# Want this information to be contained in a list within this class
+    recipe_step = StringField()
+    createdate = DateTimeField(default=dt.datetime.utcnow)
+    modifydate = DateTimeField()
+
+    
+        
