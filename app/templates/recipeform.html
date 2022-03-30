@@ -1,36 +1,64 @@
 {% extends "base.html" %}
 
 {% block body %}
+
         <h1></h1>
 
-        <form method=post>
+        <form action="" method="post" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <p>
                 {{ form.food_name.label }} <br>
                 {{ form.food_name(size=64) }}
                 <!--List the errors for this field-->
-                {% for error in form.subject.errors %}
+                {% for error in form.food_name.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
-                {{ form.content.label }} <br>
-                {{ form.content(cols=64, rows=10) }}
+                {{ form.food_media.label }}<br>
+                {% if current_user.food_media %}
+                    <img class="img-thumbnail" width="100" src="data:image;base64,{{base64encode(current_user.image.read())}}"> <br>
+                {% else %}
+                    <img class="img-thumbnail" width = "100" src="/static/bdog.jpg">
+                {% endif %} <br>
+                {{ form.food_media() }}<br>
+                {% for error in form.food_media.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.ingredient_name.label }} <br>
+                {{ form.ingredient_name(size=64) }}
                 <!--List the errors for this field-->
-                {% for error in form.content.errors %}
+                {% for error in form.ingredient_name.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
-                {{ form.tags.label }}<br>
-                {{ form.tags() }}<br>
-                {% for error in form.tags.errors %}
-                <span style="color: rgb(0, 148, 104);">[{{ error }}]</span>
+                {{ form.ingredient_amount.label }} <br>
+                {{ form.ingredient_amount(size=64) }}
+                <!--List the errors for this field-->
+                {% for error in form.ingredient_amount.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
             <p>
-                {{form.submit()}}
+                {{ form.ingredient_cost.label }} <br>
+                {{ form.ingredient_cost(size=64) }}
+                <!--List the errors for this field-->
+                {% for error in form.ingredient_cost.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
             </p>
+            <p>
+                {{ form.recipe_step.label }} <br>
+                {{ form.recipe_step(cols=64, rows=10) }}
+                <!--List the errors for this field-->
+                {% for error in form.recipe_step.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
         </form>
-        
+
 {% endblock %}

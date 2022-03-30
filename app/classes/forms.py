@@ -70,7 +70,7 @@ class CommentForm(FlaskForm):
     content = TextAreaField('Comment', validators=[DataRequired()])
     submit = SubmitField('Comment')
 
-class recipeForm(FlaskForm):
+class RecipeForm(FlaskForm):
     food_name = StringField('Name of the Food', validators=[DataRequired()])
     food_media = FileField("Image")
 
@@ -79,4 +79,5 @@ class recipeForm(FlaskForm):
     ingredient_cost = StringField('Cost of that Ingredient')
 
     recipe_step = TextAreaField('Step')
+    submit = SubmitField('Post')
 

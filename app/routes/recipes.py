@@ -11,7 +11,7 @@ import datetime as dt
 
 @login_required
 
-def postList():
+def recipeList():
 
     recipes = Recipe.objects()
 
@@ -21,7 +21,7 @@ def postList():
 
 @login_required
 
-def post(recipeID):
+def recipe(recipeID):
 
     thisRecipe = Recipe.objects.get(id=recipeID)
 
@@ -30,7 +30,7 @@ def post(recipeID):
 @app.route('/recipe/delete/<recipeID>')
 # Only run this route if the user is logged in.
 @login_required
-def postDelete(recipeID):
+def recipeDelete(recipeID):
 
     deleteRecipe = Recipe.objects.get(id=recipeID)
 
@@ -45,7 +45,7 @@ def postDelete(recipeID):
 
     recipes = Recipe.objects()  
 
-    return render_template('posts.html',recipes=recipes)
+    return render_template('recipes.html',recipes=recipes)
 
 @app.route('/recipe/new', methods=['GET', 'POST'])
 
@@ -96,20 +96,21 @@ def recipeEdit(recipeID):
     if form.validate_on_submit():
         
         editRecipe.update(
-            
             food_name = form.food_name.data,
-            food_media = form.food_media.data,
-
             ingredient_name = form.ingredient_name.data,
             ingredient_amount = form.ingredient_amount.data,
             ingredient_cost = form.ingredient_cost.data,
-
             recipe_step = form.recipe_step.data,
             author = current_user.id,
-            
             modifydate = dt.datetime.utcnow
-
         )
+        # This updates the profile image
+        if form.food_media.data:
+            if editRecipe.food_media:
+                editRecipe.food_media.delete()
+            editRecipe.food_media.put(form.food_media.data, content_type = 'image/jpeg')
+            # This saves all the updates
+            editRecipe.save()
         
         return redirect(url_for('recipe',recipeID=recipeID))
 

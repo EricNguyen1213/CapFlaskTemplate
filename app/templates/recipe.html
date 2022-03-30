@@ -20,10 +20,9 @@
     
     <h1 class="display-5">{{recipe.food_name}}</h1>
     <p class="fs-3 text-break">
-        {% if recipe.author.image %}
-            <img width="120" class="img-thumbnail float-start me-2" src="data:image;base64,{{base64encode(post.author.image.read())}}">
+        {% if recipe.food_media %}
+            <img width="120" class="img-thumbnail float-start me-2" src="data:image;base64,{{base64encode(recipe.food_media.read())}}"><br><br>
         {% endif %}
-            {{recipe.food_media}} <br>
             {{recipe.ingredient_name}} <br>
             {{recipe.ingredient_amount}} <br>
             {{recipe.ingredient_cost}} <br>
