@@ -7,12 +7,13 @@
 from app import app
 from flask import flash
 from flask_login import UserMixin
-from mongoengine import FileField, EmailField, StringField, ReferenceField, DateTimeField, CASCADE
+from mongoengine import FileField, EmailField, StringField, ReferenceField, DateTimeField, CASCADE, EmbeddedDocumentListField,EmbeddedDocument, ObjectIdField
 from flask_mongoengine import Document
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime as dt
 import jwt
 from time import time
+
 #from bson.objectid import ObjectId
 
 class User(UserMixin, Document):
@@ -70,12 +71,21 @@ class Comment(Document):
         'ordering': ['-createdate']
     }
 
+class Ingredient(EmbeddedDocument):
+    oid = ObjectIdField(sparse=True, required=True, unique=True, primary_key=True)
+    name = StringField()
+    amount = StringField()
+    cost = StringField()
+
+
 class Recipe(Document):
     author = ReferenceField('User', reverse_delete_rule=CASCADE)
     food_name = StringField()
     food_media = FileField()
 
 # Want this information to be contained in a list within this class
+    ingredients = EmbeddedDocumentListField('Ingredient')
+
     ingredient_name = StringField()
     ingredient_amount = StringField()
     ingredient_cost = StringField()
@@ -84,6 +94,7 @@ class Recipe(Document):
     recipe_step = StringField()
     createdate = DateTimeField(default=dt.datetime.utcnow)
     modifydate = DateTimeField()
+
 
     
         

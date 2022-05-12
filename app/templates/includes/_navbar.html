@@ -1,9 +1,148 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Koulen&display=swap');
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-nav">
+  <div class="container-fluid" id="div-in-nav">
+
+    
+    <div class="sect-div-in-nav" id="sect1-div-in-nav">
+
+      <img id="menu-icon" src="https://cdn.discordapp.com/attachments/894447241098588161/973889370857820200/1497192.png">
+
+      <div class="input-group mb-3" id="search-body">
+        <div class="input-group-prepend">
+          <button id="search-button" class="btn btn-outline-secondary" type="button">
+            <img style="width:15px;"src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png">
+          </button>
+        </div>
+        <input id="search-input" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+      </div>
+
+    </div>
+
+    <div class="sect-div-in-nav" id="sect2-div-in-nav">
+      <div class="dropdown" id="dropdown-sect2-div">
+
+        <img id="logo" src="https://cdn.discordapp.com/attachments/894447241098588161/973807642231308298/logo.png">
+        <a class="navbar-brand" id="brand" href="/">MyFood&I</a>
+    
+        <div class="nav-link" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img id="dd-icon" src="https://cdn.discordapp.com/attachments/894447241098588161/973814502296551434/dropdown.png">
+        </div>
+        
+        <ul class="dropdown-menu" id="dd-menu" aria-labelledby="navbarDropdown">
+          <li class="dd-item" style="background-color:rgb(17, 105, 34)">
+            <a class="dropdown-item" id="in-dd-item1" style="
+              padding:0px;
+              color: rgb(211,170,4); 
+              font-family:'Josefin Sans', sans-serif;
+              font-weight:400;
+              background-color:unset; 
+              font-size:25px;
+              text-align:center;
+              position:relative;
+              top: 4px;" 
+            href="/aboutus">About Us</a>
+          </li>
+          <li class="dd-item" style="background-color:rgb(12, 74, 24)">
+            <a class="dropdown-item" id="in-dd-item2" style="
+              padding:0px;
+              color: rgb(211,170,4); 
+              font-family:'Josefin Sans', sans-serif; font-weight:400; 
+              background-color:unset;
+              font-size:25px;
+              text-align:center;
+              position:relative;
+              top: 4px;" 
+            href="/recipe/list">Recipes</a>
+          </li> 
+          <li class="dd-item" style="background-color:rgb(8, 54, 17); border-bottom-left-radius: 5px; border-bottom-right-radius: 5px">
+            <a class="dropdown-item" id="in-dd-item3" style="
+              padding:0px;
+              color: rgb(211,170,4);  
+              font-family:'Josefin Sans', sans-serif; font-weight:400; 
+              background-color:unset;
+              font-size:25px;
+              text-align:center;
+              position:relative;
+              top: 4px;" 
+              href="#">Something else here</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sect-div-in-nav" id="sect3-div-in-nav">
+
+      {% if current_user.is_anonymous %}
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="display:flex;justify-content:space-around;padding-right:3%;">
+          <li class="nav-item" style="background-color: rgb(11,69,24);
+          border: solid 3px rgb(108,255,112);
+          width: 120px; border-radius: 8px;">
+            <a class="nav-link" href="{{ url_for('login') }}" style="
+            padding:0px;
+            color: rgb(108,255,112);  
+            font-family:'Josefin Sans', sans-serif; font-weight:400; 
+            background-color:unset;
+            font-size: 18px;
+            text-align:center;
+            position: relative;
+            top: 4px;
+            "
+
+            >Login</a>
+          </li>
+        </ul>
+
+      {% else %}
+        <div class="pageout-icon-div" style="padding-left:3%">
+          <img class="pageout-icon" src="https://cdn.discordapp.com/attachments/894447241098588161/973851648445259796/folder.png">
+        </div>
+        <div class="pageout-icon-div">
+          <img class="pageout-icon" src="https://cdn.discordapp.com/attachments/894447241098588161/973851648684339210/plus.png">
+        </div>
+        <div class="pageout-icon-div">
+          <a class="nav-link" href="/myprofile" style="padding:0px;">
+            <img class="pageout-icon" src="https://cdn.discordapp.com/attachments/894447241098588161/973851648919240755/profile.png">
+          </a>
+        </div>
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="display:flex;justify-content:space-around;padding-right:3%;">
+                 
+            <li class="nav-item" style="background-color: rgb(11,69,24);
+            border: solid 3px rgb(108,255,112);
+            width: 120px; border-radius: 8px;">
+              <a class="nav-link" href="{{ url_for('logout') }}" style="
+              padding:0px;
+              color: rgb(108,255,112);  
+              font-family:'Josefin Sans', sans-serif; font-weight:400; 
+              background-color:unset;
+              font-size: 18px;
+              text-align:center;
+              position: relative;
+              top: 4px;
+              "
+
+              >Logout</a>
+            </li>
+            
+          </li>
+        </ul>
+      {% endif %}
+    </div>
+    
+  
+
+
+    
+    <!--
     <a class="navbar-brand" href="/">MyFood&I</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -40,5 +179,7 @@
         </li>
       </ul>
     </div>
+  -->
+
   </div>
 </nav>

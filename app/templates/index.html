@@ -1,8 +1,64 @@
 {% extends 'base.html' %}
 
-{% block body %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"  type="text/css" />
+{% endblock %}
 
-<h1>Recipes</h1>
-<img src="https://media.discordapp.net/attachments/948085699503087637/948624717051469864/plan.png?width=512&height=750">
+{% block body %}
+<img class="starting-image" src="https://cdn.discordapp.com/attachments/894447241098588161/973911372280786984/foodies.jpg">
+<h1 class="starting-message">Begin Your Cooking <br> Journey Now</h1>
+<div class="offer-recipes-div">
+    <h2 class="offer-recipes-text">Some Recipes For You</h2>
+    <div class="front-recipe-list">
+        <div class="front-recipe-item"></div>
+        <div class="front-recipe-item"></div>
+        <div class="front-recipe-item"></div>
+        <div class="front-recipe-item"></div>
+    </div>
+</div>
+<div class="values-list-div">
+    <div class="value-div">
+        <img class="value-img" src="https://www.freeiconspng.com/thumbs/recipes-icon-png/free-recipe-sheet-clip-art-21.png">
+        <h3 class="value-text">Share your<br>Recipes</h3>
+        <p class="value-description">Publicize your cookbook and let others taste the food you helped make.</p>
+    </div>
+    <div class="value-div">
+        <img class="value-img" src="https://cdn.discordapp.com/attachments/894447241098588161/973979075913863239/cooking-vec.png">
+        <h3 class="value-text">Start Learning<br>to Cook</h3>
+        <p class="value-description">Sharpen your cooking skills and explore endless possibilites through food.</p>
+    </div>
+    <div class="value-div">
+        <img class="value-img" src="https://cdn.discordapp.com/attachments/894447241098588161/973979075486048286/lovefood.png">
+        <h3 class="value-text">Appreciate and<br>Spread Culture</h3>
+        <p class="value-description">Food is one way culture persist through generations. Why not engrain it forever in your online cookbook.</p>
+    </div>
+</div>
+
+<div class="final-section-div" style="background-color:rgb(232, 201, 2);";>
+
+    <div class="parts-final-section-div" style="background-color:rgb(8, 54, 17);">
+        <img class="img-parts-final-section-div" src="https://t4.ftcdn.net/jpg/01/04/68/53/360_F_104685353_lFpGYikJSxndIMs19Wx7anM9qce0XDP8.jpg" style="z-index:3">
+        <div class="text-parts-final-section-div" style="color: rgb(211,170,4)">
+            <h3 class="header-text-parts-final-section-div">The Internet's Cookbook</h3>
+            <p class="desc-text-parts-final-section-div">Find out new recipes easily from anywhere at anytime. With just a few clicks, you can pull up a recipe for you to start learning.</p>
+        </div>
+    </div>
+    
+    <div class="parts-final-section-div" style="background-color:rgb(232, 201, 2); z-index:1; position:relative; bottom: 30px; padding-bottom: 10vh;">
+        <div class="text-parts-final-section-div" style="color: rgb(8, 54, 17)">
+            <h3 class="header-text-parts-final-section-div">Worldwide Flavors</h3>
+            <p class="desc-text-parts-final-section-div">Recipes here can come from anywhere in the world. The source could be as close as your family's cookbook and as far as a cookbook from a sushi chef in Japan.</p>
+        </div>
+        <img class="img-parts-final-section-div" src="https://www.wbcsd.org/var/site/storage/images/projects/fresh/fresh-transforming-global-food-systems/31353-8-eng-GB/FReSH-transforming-global-food-systems_i1140.jpg">
+    </div>
+
+</div>
+<!--
+
+    <h1>Recipes</h1>
+
+    <img src="https://media.discordapp.net/attachments/948085699503087637/948624717051469864/plan.png?width=512&height=750">
+
+-->
 
 {% endblock %}

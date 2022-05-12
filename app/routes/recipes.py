@@ -6,6 +6,26 @@ from app.classes.data import Recipe
 from app.classes.forms import RecipeForm
 from flask_login import login_required
 import datetime as dt
+from bson.objectid import ObjectId
+
+@app.route('/addingredient/,<recipeID>', methods=['GET','Post'])
+def addingredient(recipeID):
+    editRecipe = Recipe.objects.get(id=recipeID)
+    form = IngredientForm()
+
+    if form.validate_on_submit():
+        editRecipe.ingredients.create(
+            oid= ObjectId(),
+            name= form.name.data,
+            amount = form.amount.data,
+            cost = form.cost.data
+        )
+        editRecipe.save()
+
+        return redirect(url_for('recipe', recipeID = editRecipe.id))
+        
+    return render_template('editIngredient.html', form = form, editRecipe = editRecipe)
+
 
 @app.route('/recipe/list')
 
