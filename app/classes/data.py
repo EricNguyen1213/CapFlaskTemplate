@@ -12,6 +12,7 @@ from flask_mongoengine import Document
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime as dt
 import jwt
+
 from time import time
 
 #from bson.objectid import ObjectId
@@ -22,9 +23,10 @@ class User(UserMixin, Document):
     fname = StringField()
     lname = StringField()
     email = EmailField()
+    banner = FileField()
     image = FileField()
     role = StringField()
-    cohort = StringField()
+    season = StringField()
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -34,7 +36,7 @@ class User(UserMixin, Document):
 
     def get_reset_password_token(self, expires_in=600):
         id=str(self.id)
-        return jwt.encode({'reset_password': id, 'exp': time() + expires_in},app.config['SECRET_KEY'], algorithm='HS256')
+        return jwt.encoder({'reset_password': id, 'exp': time() + expires_in},app.config['SECRET_KEY'], algorithm='HS256')
 
     @staticmethod
     def verify_reset_password_token(token):

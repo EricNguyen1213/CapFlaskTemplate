@@ -35,13 +35,20 @@ def profileEdit():
             lname = form.lname.data,
             fname = form.fname.data,
             role = form.role.data,
-            cohort = form.cohort.data
+            season = form.season.data
         )
         # This updates the profile image
         if form.image.data:
             if currUser.image:
                 currUser.image.delete()
             currUser.image.put(form.image.data, content_type = 'image/jpeg')
+            # This saves all the updates
+            currUser.save()
+
+        if form.banner.data:
+            if currUser.banner:
+                currUser.banner.delete()
+            currUser.banner.put(form.banner.data, content_type = 'image/jpeg')
             # This saves all the updates
             currUser.save()
         # Then sends the user to their profle page
@@ -52,6 +59,6 @@ def profileEdit():
     form.fname.data = current_user.fname
     form.lname.data = current_user.lname
     form.role.data = current_user.role
-    form.cohort.data = current_user.cohort
+    form.season.data = current_user.season
 
     return render_template('profileform.html', form=form)

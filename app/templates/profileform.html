@@ -1,6 +1,230 @@
 {% extends 'base.html' %}
 
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='profilemy.css') }}"  type="text/css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='profileform.css') }}"  type="text/css" />
+{% endblock %}
+
+
 {% block body %}
+
+<form action="" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="banner-div">
+
+        {% if current_user.banner %}
+            <img class="img-banner-div" src="data:image;base64,{{base64encode(current_user.banner.read())}}"> <br>
+        {% else %}
+            <img class="img-banner-div" width = "100" src="/static/banner.jpg">
+        {% endif %} 
+        
+        <div class="div-banner-div">
+
+            <div class="div-div-banner-div" id="image-forms-div">
+
+                <div class="image-forms">
+                    <h2 class="label-image-form">Change Banner Image</h2>
+                    {{ form.banner(class="imager-image-form") }}<br>
+                    {% for error in form.banner.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+
+                </div>
+                <div class="image-forms">
+                    <h2 class="label-image-form">Change Profile Picture</h2>
+                    {{ form.image(class="imager-image-form") }}<br>
+                    {% for error in form.image.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <div class="div-div-banner-div">
+                <img class="img-div-banner-div" src="https://cdn.discordapp.com/attachments/894447241098588161/974025701537759332/20210729_114748.jpg">
+                <h1 class="name-div-banner-div">
+                    {% if current_user.fname and current_user.lname %}
+                        {{current_user.fname}}  {{current_user.lname}}
+                    {% endif %}
+                </h1>
+                <h2 class="username-div-banner-div">{{current_user.username}}</h2>
+            </div>
+
+            <div class="div-div-banner-div">
+
+                <div>{{ form.submit(class="submit-button" ) }}</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="infodiv">
+
+        <div class="userdiv-infodiv">
+            <div class="box-div-infodiv">
+                <h3 class="header-box-div-infodiv">Basic Information</h1>
+                <div class="box-box-div-infodiv">
+
+                    <div class="item-box-box-div-infodiv" style="border-radius: 10px 10px 0px 0px;">
+                        <h4 class="header-item-box-box-div-infodiv">Full Name</h4>
+                        <div class="desc-item-box-box-div-infodiv">
+                            <p style="margin:0px">
+                                {{ form.fname(placeholder="First Name", class="prof-form-inputs") }}<br>
+                                {% for error in form.fname.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
+                            </p>
+                            <p style="margin:0px;">
+                                {{ form.lname(placeholder="Last Name", class="prof-form-inputs") }}<br>
+                                {% for error in form.lname.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="item-box-box-div-infodiv">
+                        <h4 class="header-item-box-box-div-infodiv">Username</h4>
+                        <p class="desc-item-box-box-div-infodiv">{{current_user.username}}</p>
+                    </div>
+                    <div class="item-box-box-div-infodiv">
+                        <h4 class="header-item-box-box-div-infodiv">Email Address</h4>
+                        <p class="desc-item-box-box-div-infodiv">{{current_user.email}}</p>
+                    </div>
+                    <div class="item-box-box-div-infodiv last-item" style="border-radius: 0px 0px 10px 10px;">
+                        <h4 class="header-item-box-box-div-infodiv">Password</h4>
+                        <p class="desc-item-box-box-div-infodiv"><a href="{{ url_for('reset_password_request') }}">Click this to Reset It</a></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="box-div-infodiv">
+                <h3 class="header-box-div-infodiv">Additional Information & Favorites</h1>
+                <div class="box-box-div-infodiv">
+
+                    <div class="item-box-box-div-infodiv" style="border-radius: 10px 10px 0px 0px;">
+                        <h4 class="header-item-box-box-div-infodiv">Role</h4>
+                        <p class="desc-item-box-box-div-infodiv">
+
+                            {{ form.role(class="prof-form-inputs") }}<br>
+                            {% for error in form.role.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+
+                        </p>
+                    </div>
+                    <div class="item-box-box-div-infodiv">
+                        <h4 class="header-item-box-box-div-infodiv">Season</h4>
+                        <p class="desc-item-box-box-div-infodiv">{{current_user.season}}</p>
+                    </div>
+                    <div class="item-box-box-div-infodiv">
+                        <h4 class="header-item-box-box-div-infodiv">Food</h4>
+                        <p class="desc-item-box-box-div-infodiv">{{current_user.email}}</p>
+                    </div>
+                    <div class="item-box-box-div-infodiv">
+                        <h4 class="header-item-box-box-div-infodiv">Movie</h4>
+                        <p class="desc-item-box-box-div-infodiv">************</p>
+                    </div>
+                    <div class="item-box-box-div-infodiv last-item" style="border-radius: 0px 0px 10px 10px;">
+                        <h4 class="header-item-box-box-div-infodiv">Song</h4>
+                        <p class="desc-item-box-box-div-infodiv">************</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="vertline-info-div"></div>
+
+        <div class="biodiv-infodiv">
+            <div class="box-div-infodiv">
+                <h3 class="header-box-div-infodiv">Bio</h1>
+                <div class="textbox-box-div-infodiv">
+                    <p class="desc-textbox-box-div-infodiv">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam porro hic soluta cumque omnis recusandae adipisci, consectetur iste fugit praesentium molestiae fuga libero maiores rem odio impedit totam vitae suscipit?</p>
+                </div>
+            </div>
+            <div class="box-div-infodiv">
+                <h3 class="header-box-div-infodiv">Cooking Experience</h1>
+                <div class="textbox-box-div-infodiv">
+                    <p class="desc-textbox-box-div-infodiv">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente inventore aspernatur dolores doloribus ipsam, cupiditate at quod quidem officia. At, nesciunt minima quidem eaque odit vero sint corporis inventore cum!</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</form>
+
+
+
+
+<h1>Register</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.fname.label }}<br>
+            {{ form.fname(size=64) }}<br>
+            {% for error in form.fname.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.lname.label }}<br>
+            {{ form.lname(size=64) }}<br>
+            {% for error in form.lname.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.image.label }}<br>
+            {% if current_user.image %}
+                <img class="img-thumbnail" width="100" src="data:image;base64,{{base64encode(current_user.image.read())}}"> <br>
+            {% else %}
+                <img class="img-thumbnail" width = "100" src="/static/bdog.jpg">
+            {% endif %} <br>
+            {{ form.image() }}<br>
+            {% for error in form.image.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.role.label }}<br>
+            {{ form.role() }}<br>
+            {% for error in form.role.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.season.label }}<br>
+            {{ form.season() }}<br>
+            {% for error in form.season.errors %}
+            <span style="color: rgb(0, 148, 104);">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+<br>
+
+
+
+{% endblock %}
+
+
+
+
+
+<!--
+
+
+
 
     <h1>Register</h1>
     <form action="" method="post" enctype="multipart/form-data">
@@ -39,13 +263,14 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.cohort.label }}<br>
-            {{ form.cohort() }}<br>
-            {% for error in form.role.errors %}
+            {{ form.season.label }}<br>
+            {{ form.season() }}<br>
+            {% for error in form.season.errors %}
             <span style="color: rgb(0, 148, 104);">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
     </form>
 
-{% endblock %}
+
+-->

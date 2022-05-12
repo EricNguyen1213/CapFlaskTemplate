@@ -1,0 +1,47 @@
+#image-forms-div {
+    position: relative;
+    top: 6vh;
+}
+
+.image-forms {
+    padding-bottom: 8vh;
+
+}
+
+.label-image-form {
+    font-family:'Josefin Sans', sans-serif; 
+    font-weight:400; 
+    font-size: 1.6em;
+    margin:0px;
+}
+
+.imager-image-form {
+    margin-top: 5px;
+    font-size:0.85em;
+}
+
+.submit-button {
+    font-family:'Josefin Sans', sans-serif; 
+    font-weight:400; 
+    font-size: 1.4em;
+    text-align: center;
+    text-decoration: none;
+    color:#083611;
+    margin-top:100%;
+
+    background-color: white;
+    width: 200px;
+    height: 60px;
+    border: 5px solid rgba(49, 49, 49, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    border-radius: 30px;
+    box-shadow: 5px 5px 10px #2e2d2d42;
+}
+
+.prof-form-inputs {
+    width: 90%;
+    font-size: 0.8em;
+    margin:2px;
+}

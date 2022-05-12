@@ -1,7 +1,134 @@
 {% extends 'base.html' %}
 
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='profilemy.css') }}"  type="text/css" />
+{% endblock %}
+
+
 {% block body %}
-<h1 class="display-1">
+<div class="banner-div">
+
+    <!--{% if current_user.banner %}
+        <img class="img-thumbnail img-fluid" src="data:image;base64,{{base64encode(current_user.banner.read())}}"> <br>
+    {% else %}
+        <img class="img-thumbnail" width = "100" src="/static/bdog.jpg">
+    {% endif %}-->
+
+    {% if current_user.banner %}
+        <img class="img-banner-div" src="data:image;base64,{{base64encode(current_user.banner.read())}}"> <br>
+    {% else %}
+        <img class="img-banner-div" width = "100" src="/static/banner.jpg">
+    {% endif %} 
+    
+    <div class="div-banner-div">
+        <div class="div-div-banner-div">
+
+        </div>
+        <div class="div-div-banner-div">
+            <img class="img-div-banner-div" src="https://cdn.discordapp.com/attachments/894447241098588161/974025701537759332/20210729_114748.jpg">
+            <h1 class="name-div-banner-div">
+                {% if current_user.fname and current_user.lname %}
+                    {{current_user.fname}}  {{current_user.lname}}
+                {% endif %}
+            </h1>
+            <h2 class="username-div-banner-div">{{current_user.username}}</h2>
+        </div>
+        <div class="div-div-banner-div">
+            <a href="/myprofile/edit" style="text-decoration: none; margin-top: 50%;">
+                <div class="edit-button">
+                    <h4 class="text-edit-button">Edit Profile</h4>
+                    <img class="icon-edit-button" width="40" src="/static/edit.png">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="infodiv">
+
+    <div class="userdiv-infodiv">
+        <div class="box-div-infodiv">
+            <h3 class="header-box-div-infodiv">Basic Information</h1>
+            <div class="box-box-div-infodiv">
+
+                <div class="item-box-box-div-infodiv" style="border-radius: 10px 10px 0px 0px;">
+                    <h4 class="header-item-box-box-div-infodiv">Full Name</h4>
+                    <p class="desc-item-box-box-div-infodiv">
+                        {% if current_user.fname and current_user.lname %}
+                            {{current_user.fname}}  {{current_user.lname}}
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="item-box-box-div-infodiv">
+                    <h4 class="header-item-box-box-div-infodiv">Username</h4>
+                    <p class="desc-item-box-box-div-infodiv">{{current_user.username}}</p>
+                </div>
+                <div class="item-box-box-div-infodiv">
+                    <h4 class="header-item-box-box-div-infodiv">Email Address</h4>
+                    <p class="desc-item-box-box-div-infodiv">{{current_user.email}}</p>
+                </div>
+                <div class="item-box-box-div-infodiv last-item" style="border-radius: 0px 0px 10px 10px;">
+                    <h4 class="header-item-box-box-div-infodiv">Password</h4>
+                    <p class="desc-item-box-box-div-infodiv">************</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="box-div-infodiv">
+            <h3 class="header-box-div-infodiv">Additional Information & Favorites</h1>
+            <div class="box-box-div-infodiv">
+
+                <div class="item-box-box-div-infodiv" style="border-radius: 10px 10px 0px 0px;">
+                    <h4 class="header-item-box-box-div-infodiv">Role</h4>
+                    <p class="desc-item-box-box-div-infodiv">{{current_user.role}}</p>
+                </div>
+                <div class="item-box-box-div-infodiv">
+                    <h4 class="header-item-box-box-div-infodiv">Season</h4>
+                    <p class="desc-item-box-box-div-infodiv">{{current_user.season}}</p>
+                </div>
+                <div class="item-box-box-div-infodiv">
+                    <h4 class="header-item-box-box-div-infodiv">Food</h4>
+                    <p class="desc-item-box-box-div-infodiv">{{current_user.email}}</p>
+                </div>
+                <div class="item-box-box-div-infodiv">
+                    <h4 class="header-item-box-box-div-infodiv">Movie</h4>
+                    <p class="desc-item-box-box-div-infodiv">************</p>
+                </div>
+                <div class="item-box-box-div-infodiv last-item" style="border-radius: 0px 0px 10px 10px;">
+                    <h4 class="header-item-box-box-div-infodiv">Song</h4>
+                    <p class="desc-item-box-box-div-infodiv">************</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="vertline-info-div"></div>
+
+    <div class="biodiv-infodiv">
+        <div class="box-div-infodiv">
+            <h3 class="header-box-div-infodiv">Bio</h1>
+            <div class="textbox-box-div-infodiv">
+                <p class="desc-textbox-box-div-infodiv">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam porro hic soluta cumque omnis recusandae adipisci, consectetur iste fugit praesentium molestiae fuga libero maiores rem odio impedit totam vitae suscipit?</p>
+            </div>
+        </div>
+        <div class="box-div-infodiv">
+            <h3 class="header-box-div-infodiv">Cooking Experience</h1>
+            <div class="textbox-box-div-infodiv">
+                <p class="desc-textbox-box-div-infodiv">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente inventore aspernatur dolores doloribus ipsam, cupiditate at quod quidem officia. At, nesciunt minima quidem eaque odit vero sint corporis inventore cum!</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<h1 class="display-1" style="border:black solid 5px;">
     My Profile
     <a href="/myprofile/edit">
         <img width="40" src="/static/edit.png">
@@ -25,8 +152,7 @@
         Username: {{current_user.username}} <br>
         Email: {{current_user.email}} <br>
         Role: {{current_user.role}} <br>
-        House: {{current_user.cohort}} <br>
-    </div>
+        House: 
 </div>
 <br>
 
