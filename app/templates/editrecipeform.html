@@ -14,9 +14,11 @@
 
         <div class="recipemedia-div">
 
-            
-            <img class="img-recipemedia-div" width = "100" src="https://blog.sigmaphoto.com/wp-content/uploads/2019/07/pancakes-819x1024.jpg">
-            
+            {% if editRecipe.food_media %}
+                <img class="img-recipemedia-div" width="100" src="data:image;base64,{{base64encode(editRecipe.food_media.read())}}"> <br>
+            {% else %}
+                <img class="img-recipemedia-div" width = "100" src="https://blog.sigmaphoto.com/wp-content/uploads/2019/07/pancakes-819x1024.jpg">
+            {% endif %} <br>
 
             <div class="set-height cover-img-recipemedia-div">
                 <img class="icon-img-recipemedia-div" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png">
