@@ -1,6 +1,62 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='recipes.css') }}"  type="text/css" />
+
+{% endblock %}
+
 {% block body %}
+
+<div class="header-image-div">
+    <img class="img-div-header-image-div" src="https://previews.123rf.com/images/belchonock/belchonock1502/belchonock150206489/36694281-spices-with-recipe-book-on-rustic-wooden-table-background.jpg">
+    <div class="div-header-image-div">
+        <h1 class="text-header-image-div">Recipes</h1>
+    </div>
+</div>
+
+<div class="offer-recipes-div">
+    <div class="front-recipe-list">
+        {% if recipes %}
+            {% for recipe in recipes %}
+                
+                    <div class="front-recipe-item">
+                        {% if recipe.food_media %}
+                            <img class="img-front-recipe-item" src="data:image;base64,{{base64encode(recipe.food_media.read())}}"> <br>
+                        {% else %}
+                            <img class="img-front-recipe-item" src="https://blog.sigmaphoto.com/wp-content/uploads/2019/07/pancakes-819x1024.jpg">
+                        {% endif %}
+                        <div class="div-front-recipe-item">
+                            <h1 class="title-div-front-recipe-item"><a href="/recipe/{{recipe.id}}">{{recipe.food_name}}</a></h1>
+                            <p class="date-div-front-recipe-item">{{moment(recipe.createdate).calendar()}}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <h1>No Recipes</h1>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="row">
     <div class="col-4">

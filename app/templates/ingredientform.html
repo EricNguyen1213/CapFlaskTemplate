@@ -1,38 +1,106 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='recipeform.css') }}"  type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='ingredientform.css') }}"  type="text/css" />
+{% endblock %}
+
 {% block body %}
-<div class="ingredients-tophalf-div-recipeform-div div-tophalf-div-recipeform-div">
-    <h3>Ingredients</h3>
-    <div>
-        <form method="post">
 
-            {% for field in form.errors %}
-                {% for error in form.errors[field] %}
-                    <div class="alert alert-error">
-                        <strong>Error!</strong>{{field}}: {{error}}
-                    </div>
-                {% endfor %}
-            {% endfor %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <div class="recipeform-div">
 
-            {{ form.hidden_tag() }}
+        <div class="textdiv-recipeform-div" style="display:flex; flex-direction:column; align-items: center; background-image:url('https://img.freepik.com/free-photo/blank-spiral-notebook-with-pencil-turquoise-background_23-2147916075.jpg?w=2000'); ">
+
+            <div style="display:flex; justify-content: center;">
+                <div class="number uno" id="one">1</div>
+                <div class="number two" id="dos">2</div>
+            </div>
             
-            {{ form.ingredient_amount(size=64) }}<br>
-            {% for error in form.ingredient_amount.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-            
-            {{ form.ingredient_name(size=64) }}<br>
-            {% for error in form.ingredient_name.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-            
-            {{ form.ingredient_cost(size=64) }}<br>
-            {% for error in form.ingredient_cost.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-            
-            {{ form.submit() }}
-        </form>
+            <h1 style="font-family: 'Koulen', cursive;
+            font-size: 3.5em; margin-bottom:30px; color: rgb(8, 54, 17);" >List Your Ingredients</h1>
+
+            <div class="ingredient-body">
+                <div class="input-items" id="#amount-column">
+                    <h1 class="item-header food_name-header" style="margin-bottom: 10px;">Amount</h1>
+                    
+                    <p class="submmited-items">
+                        {% for ingredient in editRecipe.ingredients %}
+                            {{ingredient.amount}}
+                        {% endfor %}
+                    </p>
+
+                    {{ form.ingredient_amount(class="input food_name-input") }}<br>
+                    {% for error in form.ingredient_amount.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                    
+                <div class="input-items" id="#ingredient-column">
+                    <h1 class="item-header food_name-header"  style="margin-bottom: 10px;">Ingredient</h1>
+
+                    <p class="submmited-items">
+                        {% for ingredient in editRecipe.ingredients %}
+                            {{ingredient.name}}
+                        {% endfor %}
+                    </p>
+
+                    {{ form.ingredient_name(class="input food_name-input") }}<br>
+                    {% for error in form.ingredient_name.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+
+                <div class="input-items" id="#cost-column">
+                    <h1 class="item-header food_name-header"  style="margin-bottom: 10px;">Cost</h1>
+                    
+                    <p class="submmited-items">
+                        {% for ingredient in editRecipe.ingredients %}
+                            {{ingredient.cost}}
+                        {% endfor %}
+                    </p>
+                    
+                    {{ form.ingredient_cost(class="input food_name-input") }}<br>
+                    {% for error in form.ingredient_cost.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+                {{ form.submit(class="recipe-submit newsubmit") }}
+            </div>
+
+        </div>
+
+        <div class="recipemedia-div">    
+            <img class="img-recipemedia-div" width = "100" src="https://images.pexels.com/photos/2404843/pexels-photo-2404843.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+        </div>
     </div>
-</div>
+            
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    function setheights(){
+        setHeight($(".set-height"),$(".img-recipemedia-div"));
+        setHeight($(".img-recipemedia-div"),$(".textdiv-recipeform-div"));
+    }
+
+    setInterval(setheights, 100);
+
+    function setHeight(elem1, elem2) {
+        var height = elem2.height()
+        elem1.css('height', height); 
+    }
+
+    
+</script>
+
+
+
+
+
+
 {% endblock %}

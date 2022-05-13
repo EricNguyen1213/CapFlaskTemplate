@@ -37,6 +37,8 @@ def recipeList():
 
     return render_template('recipes.html',recipes=recipes)
 
+
+
 @app.route('/recipe/<recipeID>')
 
 @login_required
@@ -70,7 +72,7 @@ def recipeDelete(recipeID):
 
     
 
-@app.route('/recipe/new')
+@app.route('/recipe/new', methods=["GET",'POST'])
 # Only run this route if the user is logged in.
 @login_required
 
@@ -92,8 +94,9 @@ def recipeNew():
         )
 
         newRecipe.save()
-
-        return redirect(url_for('recipe',recipeID=newRecipe.id))
+        url_for('recipe', recipeID = newRecipe.id)
+        redirecthere = '/recipe/addingredients/' + str(newRecipe.id)
+        return redirect(redirecthere)
 
     
     return render_template('recipeform.html',form=form)
@@ -138,4 +141,4 @@ def recipeEdit(recipeID):
     form.recipe_step.data = editRecipe.recipe_step
     
 
-    return render_template('recipeform.html',form=form)
+    return render_template('recipeform.html',form=form, editRecipe = editRecipe)

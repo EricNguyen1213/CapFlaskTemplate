@@ -39,6 +39,39 @@
     border-radius: 30px;
 }
 
+
+.img-front-recipe-item {
+    border-radius: 26px 26px 0px 0px;
+    width:100%;
+    height:50%;
+    object-fit:cover;
+}
+.div-front-recipe-item {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.title-div-front-recipe-item {
+    width:100%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1.4em;
+    margin: 0px;
+    color:rgb(8, 54, 17);
+    text-align:center;
+}
+.date-div-front-recipe-item {
+    width: 100%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.8em;
+    margin: 0px;
+    color:rgb(2, 0, 148);
+    text-align:center;
+}
+
 .values-list-div{
     background-color: rgb(245,230,154);
     width: 100%;

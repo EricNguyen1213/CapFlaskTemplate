@@ -6,100 +6,87 @@
 
 {% block body %}
 
-
-<!--
-
-
-
-<div class="recipeform-div">
     
-    
-
-
-
-
-
-</div>
-<div class="ingredients-tophalf-div-recipeform-div div-tophalf-div-recipeform-div">
-    <h3>Ingredients</h3>
-    <div>
-        
-    </div>
-</div>
-
 
 <form action="" method="post" enctype="multipart/form-data">
-    
-    
-    
+    {{ form.hidden_tag() }}
+    <div class="recipeform-div" style="background-color: rgb(243, 234, 190);">
+
+        <div class="recipemedia-div">
+
+            {% if editRecipe.food_media %}
+                <img class="img-recipemedia-div" width="100" src="data:image;base64,{{base64encode(editRecipe.food_media.read())}}"> <br>
+            {% else %}
+                <img class="img-recipemedia-div" width = "100" src="https://blog.sigmaphoto.com/wp-content/uploads/2019/07/pancakes-819x1024.jpg">
+            {% endif %} <br>
+
+            <div class="set-height cover-img-recipemedia-div">
+                <img class="icon-img-recipemedia-div" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/1200px-Antu_insert-image.svg.png">
+                {{ form.food_media(class="set-height input-cover-img-recipemedia-div") }}
             </div>
             
 
-        </div>
-        <div class="bottomhalf-div-recipe-form-div">
-            
-            <button>Overall Recipe Submit</button>
+            {% for error in form.food_media.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+
         </div>
 
+        <div class="textdiv-recipeform-div" style="display:flex; flex-direction:column; align-items: center;">
+
+            <div style="display:flex; justify-content: center;">
+                <div class="number uno" >1</div>
+                <div class="number two">2</div>
+            </div>
+            
+            <h1 style="font-family: 'Koulen', cursive;
+            font-size: 3.5em; margin-bottom:30px">Making Your Recipe</h1>
+
+            <div class="recipe-body">
+                <div class="input-items">
+                    <h1 class="item-header food_name-header">Name of the Dish</h1>
+                    {{ form.food_name(class="input food_name-input") }}
+                    <!--List the errors for this field-->
+                    {% for error in form.food_name.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                    
+                <div class="input-items">
+                    <h1 class="item-header steps-header">Instructions</h1>
+                    {{ form.recipe_step(class="input steps-input") }}
+                    <!--List the errors for this field-->
+                    {% for error in form.recipe_step.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+                {{ form.submit(class="recipe-submit") }}
+            </div>
+
+        </div>
 
     </div>
-
+            
 </form>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
 
--->
+    function setheights(){
+        setHeight($(".set-height"),$(".img-recipemedia-div"));
+        setHeight($(".img-recipemedia-div"),$(".textdiv-recipeform-div"));
+    }
 
+    setInterval(setheights, 100);
 
+    function setHeight(elem1, elem2) {
+        var height = elem2.height()
+        elem1.css('height', height); 
+        elem2.css('height', height)
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <h1></h1>
-
-        <form action="" method="post" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.food_name.label }} <br>
-                {{ form.food_name(size=64) }}
-                List the errors for this field
-                {% for error in form.food_name.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.food_media.label }}<br>
-                {% if current_user.food_media %}
-                    <img class="img-thumbnail" width="100" src="data:image;base64,{{base64encode(current_user.image.read())}}"> <br>
-                {% else %}
-                    <img class="img-thumbnail" width = "100" src="/static/bdog.jpg">
-                {% endif %} <br>
-                {{ form.food_media() }}<br>
-                {% for error in form.food_media.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            
-            
-            <p>
-                {{ form.recipe_step.label }} <br>
-                {{ form.recipe_step(cols=64, rows=10) }}
-                <!--List the errors for this field-->
-                {% for error in form.recipe_step.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>{{ form.submit() }}</p>
-        </form>
     
+  </script>
 {% endblock %}

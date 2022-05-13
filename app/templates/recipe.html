@@ -1,43 +1,143 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='recipeform.css') }}"  type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='ingredientform.css') }}"  type="text/css" />
+{% endblock %}
+
 {% block body %}
 
-{% if recipe %}
+<div class="recipeform-div">
 
-{{moment(recipe.createdate).calendar()}} by {{recipe.author.username}} 
-{% if recipe.modifydate %}
-    modified {{moment(recipe.modifydate).calendar()}}
-{% endif %}
-<br>
-    {% if recipe.author == current_user %}
-        <a data-toggle="tooltip" data-placement="top" title="Delete Recipe" href="/recipe/delete/{{recipe.id}}">
-            <img width="40" class="bottom-image" src="/static/delete.png">
-        </a>
-        <a data-toggle="tooltip" data-placement="top" title="Edit Recipe" href="/recipe/edit/{{recipe.id}}">
-            <img width="40" class="bottom-image" src="/static/edit.png">
-        </a>
-        <a data-toggle="tooltip" data-placement="top" title="Add Ingredients" href="/recipe/addingredients/{{recipe.id}}">
-            <img width="40" class="bottom-image" src="/static/new.png">
-        </a>
-    {% endif %}
-    
-    <h1 class="display-5">{{recipe.food_name}}</h1>
-    <p class="fs-3 text-break">
+    <div class="recipemedia-div" style="background-color: rgb(243, 234, 190);">
+
         {% if recipe.food_media %}
-            <img width="120" class="img-thumbnail float-start me-2" src="data:image;base64,{{base64encode(recipe.food_media.read())}}"><br><br>
-        {% endif %}
-            {{recipe.ingredient_name}} <br>
-            {{recipe.ingredient_amount}} <br>
-            {{recipe.ingredient_cost}} <br>
-            {{recipe.recipe_step}} <br>
+            <img class="img-recipemedia-div" width="100" style="margin:0px" src="data:image;base64,{{base64encode(recipe.food_media.read())}}"> <br>
+        {% else %}
+            <img class="img-recipemedia-div" width = "100" style="margin:0px" src="https://blog.sigmaphoto.com/wp-content/uploads/2019/07/pancakes-819x1024.jpg">
+        {% endif %} <br>
 
+    </div>
+
+    <div class="textdiv-recipeform-div" style="display:flex; flex-direction:column; align-items: center;">
+
+        <div style="display:flex; justify-content: center;">
+            <div class="number uno" >
+                <a data-toggle="tooltip" data-placement="top" title="Delete Recipe" href="/recipe/delete/{{recipe.id}}">
+                    <img width="40" class="bottom-image" src="/static/delete.png">
+                </a>
+            </div>
+            <div class="number two">
+                <a data-toggle="tooltip" data-placement="top" title="Edit Recipe" href="/recipe/edit/{{recipe.id}}">
+                    <img width="40" class="bottom-image" src="/static/edit.png">
+                </a>
+            </div>
+        </div>
+        
+        <h1 style="font-family: 'Koulen', cursive;
+        font-size: 3.5em; margin-bottom:30px">{{recipe.food_name}}</h1>
+
+        <div class="recipe-body">
             
-            {% for ingredient in recipe.ingredients %}
-                {{ingredient.name}}
-            {% endfor %}
-    </p>
-{% else %}
-    <h1 class="display-5">No Post</h1>
-{% endif %}
+                
+            <div class="input-items">
+                <h1 class="item-header steps-header">Instructions</h1>
+                <p>{{recipe.recipe_step}}</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+        
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+function setheights(){
+    setHeight($(".set-height"),$(".img-recipemedia-div"));
+    setHeight($(".img-recipemedia-div"),$(".textdiv-recipeform-div"));
+    }
+
+setInterval(setheights, 100);
+
+function setHeight(elem1, elem2) {
+    var height = elem2.height()
+    elem1.css('height', height); 
+    elem2.css('height', height)
+}
+
+
+</script>
+<div class="recipeform-div">
+
+    <div class="textdiv-recipeform-div" style="display:flex; flex-direction:column; align-items: center; background-image:url('https://img.freepik.com/free-photo/blank-spiral-notebook-with-pencil-turquoise-background_23-2147916075.jpg?w=2000'); ">
+
+        <div style="display:flex; justify-content: center;">
+            <div class="number uno" id="one">
+                <a data-toggle="tooltip" data-placement="top" title="Delete Recipe" href="/recipe/delete/{{recipe.id}}">
+                    <img width="40" class="bottom-image" src="/static/delete.png">
+                </a>
+            </div>
+            <div class="number two" id="dos">
+                <a data-toggle="tooltip" data-placement="top" title="Edit Recipe" href="/recipe/addingredients/{{recipe.id}}">
+                    <img width="40" class="bottom-image" src="/static/edit.png">
+                </a>
+            </div>
+        </div>
+        
+        <h1 style="font-family: 'Koulen', cursive;
+        font-size: 3.5em; margin-bottom:30px; color: rgb(8, 54, 17);" >Ingredients</h1>
+
+        <div class="ingredient-body">
+            <div class="input-items" id="#amount-column">
+                <h1 class="item-header food_name-header" style="margin-bottom: 10px;">Amount</h1>
+                
+                <p class="submmited-items">
+                    {% for ingredient in recipe.ingredients %}
+                        {{ingredient.amount}}
+                    {% endfor %}
+                </p>
+
+                
+            </div>
+                
+            <div class="input-items" id="#ingredient-column">
+                <h1 class="item-header food_name-header"  style="margin-bottom: 10px;">Ingredient</h1>
+
+                <p class="submmited-items">
+                    {% for ingredient in recipe.ingredients %}
+                        {{ingredient.name}}
+                    {% endfor %}
+                </p>
+
+               
+            </div>
+
+            <div class="input-items" id="#cost-column">
+                <h1 class="item-header food_name-header"  style="margin-bottom: 10px;">Cost</h1>
+                
+                <p class="submmited-items">
+                    {% for ingredient in recipe.ingredients %}
+                        {{ingredient.cost}}
+                    {% endfor %}
+                </p>
+                
+                
+            </div>
+        </div>
+        <div>
+            
+        </div>
+
+    </div>
+
+    <div class="recipemedia-div">    
+        <img class="img-recipemedia-div" width = "100" src="https://images.pexels.com/photos/2404843/pexels-photo-2404843.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+    </div>
+</div>
+
+
 
 {% endblock %}

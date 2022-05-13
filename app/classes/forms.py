@@ -89,5 +89,5 @@ class RecipeForm(FlaskForm):
     food_name = StringField('Name of the Food', validators=[DataRequired()])
     food_media = FileField("Image")
     recipe_step = TextAreaField('Step')
-    submit = SubmitField('Post')
+    submit = SubmitField('Save Changes')
 
