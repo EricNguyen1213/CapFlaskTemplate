@@ -40,8 +40,19 @@
     box-shadow: 5px 5px 10px #2e2d2d42;
 }
 
-.prof-form-inputs {
+.name-form-inputs {
     width: 90%;
     font-size: 0.8em;
     margin:2px;
+}
+
+.reg-form-inputs {
+    width: 90%;
+    font-size: 0.9em;
+    margin:0px
+}
+.dropdown-form-inputs {
+    width: 60%;
+    font-size: 1em;
+    text-align: center;
 }

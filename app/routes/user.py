@@ -35,7 +35,12 @@ def profileEdit():
             lname = form.lname.data,
             fname = form.fname.data,
             role = form.role.data,
-            season = form.season.data
+            season = form.season.data,
+            favfood = form.favfood.data,
+            favmovie = form.favmovie.data,
+            favsong = form.favsong.data,
+            bio = form.bio.data,
+            experience = form.experience.data
         )
         # This updates the profile image
         if form.image.data:
@@ -60,5 +65,11 @@ def profileEdit():
     form.lname.data = current_user.lname
     form.role.data = current_user.role
     form.season.data = current_user.season
+    form.favfood.data = current_user.favfood
+    form.favmovie.data = current_user.favmovie
+    form.favsong.data = current_user.favsong
+    form.bio.data = current_user.bio
+    form.experience.data = current_user.experience
+
 
     return render_template('profileform.html', form=form)

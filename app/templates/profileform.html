@@ -41,8 +41,12 @@
 
             </div>
 
-            <div class="div-div-banner-div">
-                <img class="img-div-banner-div" src="https://cdn.discordapp.com/attachments/894447241098588161/974025701537759332/20210729_114748.jpg">
+            <div class="div-div-banner-div" style="margin-bottom: 5vh;">
+                {% if current_user.image %}
+                    <img class="img-div-banner-div" src="data:image;base64,{{base64encode(current_user.image.read())}}"> <br>
+                {% else %}
+                    <img class="img-div-banner-div" src="/static/bdog.jpg">
+                {% endif %} 
                 <h1 class="name-div-banner-div">
                     {% if current_user.fname and current_user.lname %}
                         {{current_user.fname}}  {{current_user.lname}}
@@ -74,13 +78,13 @@
                         <h4 class="header-item-box-box-div-infodiv">Full Name</h4>
                         <div class="desc-item-box-box-div-infodiv">
                             <p style="margin:0px">
-                                {{ form.fname(placeholder="First Name", class="prof-form-inputs") }}<br>
+                                {{ form.fname(placeholder="First Name", class="name-form-inputs") }}<br>
                                 {% for error in form.fname.errors %}
                                 <span style="color: red;">[{{ error }}]</span>
                                 {% endfor %}
                             </p>
                             <p style="margin:0px;">
-                                {{ form.lname(placeholder="Last Name", class="prof-form-inputs") }}<br>
+                                {{ form.lname(placeholder="Last Name", class="name-form-inputs") }}<br>
                                 {% for error in form.lname.errors %}
                                 <span style="color: red;">[{{ error }}]</span>
                                 {% endfor %}
@@ -111,7 +115,7 @@
                         <h4 class="header-item-box-box-div-infodiv">Role</h4>
                         <p class="desc-item-box-box-div-infodiv">
 
-                            {{ form.role(class="prof-form-inputs") }}<br>
+                            {{ form.role(class="dropdown-form-inputs") }}<br>
                             {% for error in form.role.errors %}
                                 <span style="color: red;">[{{ error }}]</span>
                             {% endfor %}
@@ -120,19 +124,50 @@
                     </div>
                     <div class="item-box-box-div-infodiv">
                         <h4 class="header-item-box-box-div-infodiv">Season</h4>
-                        <p class="desc-item-box-box-div-infodiv">{{current_user.season}}</p>
+                        <p class="desc-item-box-box-div-infodiv">
+                            
+
+                            {{ form.season(class="dropdown-form-inputs") }}<br>
+                            {% for error in form.season.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                            
+
+
+                        </p>
                     </div>
                     <div class="item-box-box-div-infodiv">
                         <h4 class="header-item-box-box-div-infodiv">Food</h4>
-                        <p class="desc-item-box-box-div-infodiv">{{current_user.email}}</p>
+                        <p class="desc-item-box-box-div-infodiv">
+                            
+                            {{ form.favfood(placeholder="Favorite Food", class="reg-form-inputs") }}<br>
+                            {% for error in form.favfood.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                            
+                        </p>
                     </div>
                     <div class="item-box-box-div-infodiv">
                         <h4 class="header-item-box-box-div-infodiv">Movie</h4>
-                        <p class="desc-item-box-box-div-infodiv">************</p>
+                        <p class="desc-item-box-box-div-infodiv">
+
+                            {{ form.favmovie(placeholder="Favorite Movie", class="reg-form-inputs") }}<br>
+                            {% for error in form.favmovie.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+
+                        </p>
                     </div>
                     <div class="item-box-box-div-infodiv last-item" style="border-radius: 0px 0px 10px 10px;">
                         <h4 class="header-item-box-box-div-infodiv">Song</h4>
-                        <p class="desc-item-box-box-div-infodiv">************</p>
+                        <p class="desc-item-box-box-div-infodiv">
+
+                            {{ form.favsong(placeholder="Favorite Song", class="reg-form-inputs") }}<br>
+                            {% for error in form.favsong.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+
+                        </p>
                     </div>
 
                 </div>
@@ -145,15 +180,21 @@
         <div class="biodiv-infodiv">
             <div class="box-div-infodiv">
                 <h3 class="header-box-div-infodiv">Bio</h1>
-                <div class="textbox-box-div-infodiv">
-                    <p class="desc-textbox-box-div-infodiv">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam porro hic soluta cumque omnis recusandae adipisci, consectetur iste fugit praesentium molestiae fuga libero maiores rem odio impedit totam vitae suscipit?</p>
-                </div>
+                
+                        {{ form.bio(placeholder="Something about yourself", class="textbox-box-div-infodiv") }}<br>
+                        {% for error in form.bio.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+            
             </div>
             <div class="box-div-infodiv">
                 <h3 class="header-box-div-infodiv">Cooking Experience</h1>
-                <div class="textbox-box-div-infodiv">
-                    <p class="desc-textbox-box-div-infodiv">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente inventore aspernatur dolores doloribus ipsam, cupiditate at quod quidem officia. At, nesciunt minima quidem eaque odit vero sint corporis inventore cum!</p>
-                </div>
+                
+                        {{ form.experience(placeholder="Your Cooking Experence", class="textbox-box-div-infodiv") }}<br>
+                        {% for error in form.experience.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                
             </div>
         </div>
 
@@ -165,53 +206,7 @@
 
 
 
-<h1>Register</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.fname.label }}<br>
-            {{ form.fname(size=64) }}<br>
-            {% for error in form.fname.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.lname.label }}<br>
-            {{ form.lname(size=64) }}<br>
-            {% for error in form.lname.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.image.label }}<br>
-            {% if current_user.image %}
-                <img class="img-thumbnail" width="100" src="data:image;base64,{{base64encode(current_user.image.read())}}"> <br>
-            {% else %}
-                <img class="img-thumbnail" width = "100" src="/static/bdog.jpg">
-            {% endif %} <br>
-            {{ form.image() }}<br>
-            {% for error in form.image.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.role.label }}<br>
-            {{ form.role() }}<br>
-            {% for error in form.role.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.season.label }}<br>
-            {{ form.season() }}<br>
-            {% for error in form.season.errors %}
-            <span style="color: rgb(0, 148, 104);">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
 
-<br>
 
 
 

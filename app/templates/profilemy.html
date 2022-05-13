@@ -26,7 +26,11 @@
 
         </div>
         <div class="div-div-banner-div">
-            <img class="img-div-banner-div" src="https://cdn.discordapp.com/attachments/894447241098588161/974025701537759332/20210729_114748.jpg">
+            {% if current_user.image %}
+                <img class="img-div-banner-div" src="data:image;base64,{{base64encode(current_user.image.read())}}"> <br>
+            {% else %}
+                <img class="img-div-banner-div" src="/static/bdog.jpg">
+            {% endif %} 
             <h1 class="name-div-banner-div">
                 {% if current_user.fname and current_user.lname %}
                     {{current_user.fname}}  {{current_user.lname}}
@@ -92,15 +96,15 @@
                 </div>
                 <div class="item-box-box-div-infodiv">
                     <h4 class="header-item-box-box-div-infodiv">Food</h4>
-                    <p class="desc-item-box-box-div-infodiv">{{current_user.email}}</p>
+                    <p class="desc-item-box-box-div-infodiv">{{current_user.favfood}}</p>
                 </div>
                 <div class="item-box-box-div-infodiv">
                     <h4 class="header-item-box-box-div-infodiv">Movie</h4>
-                    <p class="desc-item-box-box-div-infodiv">************</p>
+                    <p class="desc-item-box-box-div-infodiv">{{current_user.favmovie}}</p>
                 </div>
                 <div class="item-box-box-div-infodiv last-item" style="border-radius: 0px 0px 10px 10px;">
                     <h4 class="header-item-box-box-div-infodiv">Song</h4>
-                    <p class="desc-item-box-box-div-infodiv">************</p>
+                    <p class="desc-item-box-box-div-infodiv">{{current_user.favsong}}</p>
                 </div>
 
             </div>
@@ -114,13 +118,17 @@
         <div class="box-div-infodiv">
             <h3 class="header-box-div-infodiv">Bio</h1>
             <div class="textbox-box-div-infodiv">
-                <p class="desc-textbox-box-div-infodiv">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam porro hic soluta cumque omnis recusandae adipisci, consectetur iste fugit praesentium molestiae fuga libero maiores rem odio impedit totam vitae suscipit?</p>
+                <p class="desc-textbox-box-div-infodiv">
+                    {{current_user.bio}}
+                </p>
             </div>
         </div>
         <div class="box-div-infodiv">
             <h3 class="header-box-div-infodiv">Cooking Experience</h1>
             <div class="textbox-box-div-infodiv">
-                <p class="desc-textbox-box-div-infodiv">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente inventore aspernatur dolores doloribus ipsam, cupiditate at quod quidem officia. At, nesciunt minima quidem eaque odit vero sint corporis inventore cum!</p>
+                <p class="desc-textbox-box-div-infodiv">
+                    {{current_user.experience}}
+                </p>
             </div>
         </div>
     </div>
@@ -128,33 +136,6 @@
 
 </div>
 
-<h1 class="display-1" style="border:black solid 5px;">
-    My Profile
-    <a href="/myprofile/edit">
-        <img width="40" src="/static/edit.png">
-    </a>
-</h1>
-
-
-<div class="row">
-    <div class="col-2">
-        {% if current_user.image %}
-            <img class="img-thumbnail img-fluid" src="data:image;base64,{{base64encode(current_user.image.read())}}"> <br>
-        {% else %}
-            <img class="img-thumbnail" width = "100" src="/static/bdog.jpg">
-        {% endif %} 
-    </div>
-    <div class="col display-5">
-        {% if current_user.fname and current_user.lname %}
-            Real Name: {{current_user.fname}}  {{current_user.lname}} <br>
-        {% endif %}
-        
-        Username: {{current_user.username}} <br>
-        Email: {{current_user.email}} <br>
-        Role: {{current_user.role}} <br>
-        House: 
-</div>
-<br>
 
 
 

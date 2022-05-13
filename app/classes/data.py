@@ -27,6 +27,12 @@ class User(UserMixin, Document):
     image = FileField()
     role = StringField()
     season = StringField()
+    favfood = StringField()
+    favmovie = StringField()
+    favsong = StringField()
+
+    bio = StringField()
+    experience = StringField()
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -87,10 +93,6 @@ class Recipe(Document):
 
 # Want this information to be contained in a list within this class
     ingredients = EmbeddedDocumentListField('Ingredient')
-
-    ingredient_name = StringField()
-    ingredient_amount = StringField()
-    ingredient_cost = StringField()
 
 # Want this information to be contained in a list within this class
     recipe_step = StringField()

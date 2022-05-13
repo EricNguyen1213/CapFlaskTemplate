@@ -1,6 +1,69 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='recipeform.css') }}"  type="text/css" />
+{% endblock %}
+
 {% block body %}
+
+
+<!--
+
+
+
+<div class="recipeform-div">
+    
+    
+
+
+
+
+
+</div>
+<div class="ingredients-tophalf-div-recipeform-div div-tophalf-div-recipeform-div">
+    <h3>Ingredients</h3>
+    <div>
+        
+    </div>
+</div>
+
+
+<form action="" method="post" enctype="multipart/form-data">
+    
+    
+    
+            </div>
+            
+
+        </div>
+        <div class="bottomhalf-div-recipe-form-div">
+            
+            <button>Overall Recipe Submit</button>
+        </div>
+
+
+    </div>
+
+</form>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <h1></h1>
 
@@ -9,7 +72,7 @@
             <p>
                 {{ form.food_name.label }} <br>
                 {{ form.food_name(size=64) }}
-                <!--List the errors for this field-->
+                List the errors for this field
                 {% for error in form.food_name.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
@@ -26,30 +89,8 @@
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
-            <p>
-                {{ form.ingredient_name.label }} <br>
-                {{ form.ingredient_name(size=64) }}
-                <!--List the errors for this field-->
-                {% for error in form.ingredient_name.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.ingredient_amount.label }} <br>
-                {{ form.ingredient_amount(size=64) }}
-                <!--List the errors for this field-->
-                {% for error in form.ingredient_amount.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.ingredient_cost.label }} <br>
-                {{ form.ingredient_cost(size=64) }}
-                <!--List the errors for this field-->
-                {% for error in form.ingredient_cost.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
+            
+            
             <p>
                 {{ form.recipe_step.label }} <br>
                 {{ form.recipe_step(cols=64, rows=10) }}
@@ -60,5 +101,5 @@
             </p>
             <p>{{ form.submit() }}</p>
         </form>
-
+    
 {% endblock %}

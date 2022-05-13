@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="ingredients-tophalf-div-recipeform-div div-tophalf-div-recipeform-div">
+    <h3>Ingredients</h3>
+    <div>
+        <form method="post">
+
+            {% for field in form.errors %}
+                {% for error in form.errors[field] %}
+                    <div class="alert alert-error">
+                        <strong>Error!</strong>{{field}}: {{error}}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {{ form.hidden_tag() }}
+            
+            {{ form.ingredient_amount(size=64) }}<br>
+            {% for error in form.ingredient_amount.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            
+            {{ form.ingredient_name(size=64) }}<br>
+            {% for error in form.ingredient_name.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            
+            {{ form.ingredient_cost(size=64) }}<br>
+            {% for error in form.ingredient_cost.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            
+            {{ form.submit() }}
+        </form>
+    </div>
+</div>
+{% endblock %}

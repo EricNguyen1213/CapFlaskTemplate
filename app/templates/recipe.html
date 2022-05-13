@@ -16,6 +16,9 @@
         <a data-toggle="tooltip" data-placement="top" title="Edit Recipe" href="/recipe/edit/{{recipe.id}}">
             <img width="40" class="bottom-image" src="/static/edit.png">
         </a>
+        <a data-toggle="tooltip" data-placement="top" title="Add Ingredients" href="/recipe/addingredients/{{recipe.id}}">
+            <img width="40" class="bottom-image" src="/static/new.png">
+        </a>
     {% endif %}
     
     <h1 class="display-5">{{recipe.food_name}}</h1>
@@ -27,6 +30,11 @@
             {{recipe.ingredient_amount}} <br>
             {{recipe.ingredient_cost}} <br>
             {{recipe.recipe_step}} <br>
+
+            
+            {% for ingredient in recipe.ingredients %}
+                {{ingredient.name}}
+            {% endfor %}
     </p>
 {% else %}
     <h1 class="display-5">No Post</h1>

@@ -59,6 +59,14 @@ class ProfileForm(FlaskForm):
     banner = FileField("Banner Image")
     role = SelectField('Role',choices=[("Teacher","Teacher"),("Student","Student")])
     season = SelectField('Season', choices=[("Summer","Summer"),("Fall","Fall"),("Winter","Winter"),("Spring","Spring")])
+    favfood = StringField('Favorite Food')
+    favmovie = StringField('Favorite Movie')
+    favsong = StringField('Favorite Song')
+
+    bio = TextAreaField('Bio')
+    experience = TextAreaField('Experience')
+
+    
     submit = SubmitField('Save Changes')
 
 class PostForm(FlaskForm):
@@ -72,19 +80,14 @@ class CommentForm(FlaskForm):
     submit = SubmitField('Comment')
 
 class IngredientForm(FlaskForm):
-    ingredient_name = StringField('Name of Ingredient', validators=[DataRequired()])
-    ingredient_amount = StringField('Name of Ingredient', validators=[DataRequired()])
-    ingredient_cost = StringField('Name of Ingredient', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    ingredient_name = StringField('Name', validators=[DataRequired()])
+    ingredient_amount = StringField('Amount', validators=[DataRequired()])
+    ingredient_cost = StringField('Cost', validators=[DataRequired()])
+    submit = SubmitField('Submit Food')
 
 class RecipeForm(FlaskForm):
     food_name = StringField('Name of the Food', validators=[DataRequired()])
     food_media = FileField("Image")
-
-    ingredient_name = StringField('Name of Ingredient')
-    ingredient_amount = StringField('Amount of that Ingredient')
-    ingredient_cost = StringField('Cost of that Ingredient')
-
     recipe_step = TextAreaField('Step')
     submit = SubmitField('Post')
 
